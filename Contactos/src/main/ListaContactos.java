@@ -109,9 +109,9 @@ public class ListaContactos {
 	 */
 	public Persona[] findByName(String strName){
 		int cont = 0;
-		for (int i = 0; i < listacontactos.length; i++){
-			if(strName.length()<=listacontactos[i].getNombre().length()){
-				String subnombre = listacontactos[i].getNombre().substring(0, strName.length()).toLowerCase();
+		for (Persona person: listacontactos){
+			if(strName.length()<=person.getNombre().length()){
+				String subnombre = person.getNombre().substring(0, strName.length()).toLowerCase();
 				if (subnombre.equals(strName.toLowerCase())){
 					cont++;
 				}
@@ -131,7 +131,23 @@ public class ListaContactos {
 	}
 	
 	
-	
+	/**
+	 * Retorna una copia de la lista ordenada alfabeticamente
+	 * @return
+	 */
+	public Persona[] sort(){
+		String[] listaOrdenada = new String[listacontactos.length];
+		int cont = 0;
+		for(Persona persona:listacontactos){
+			listaOrdenada[cont] = persona.getAsFormat();
+			cont++;
+		}
+		
+	    Arrays.sort(listaOrdenada);
+	    ListaContactos listaConOrden = new ListaContactos(listaOrdenada);
+	    return listaConOrden.listacontactos;
+
+	}
 	
 	
 	

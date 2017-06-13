@@ -57,6 +57,13 @@ public class Persona {
 		this.mail = mail;
 	}
 
+	
+	public String getAsFormat(){
+		String cadena = this.getNombre()+ " " + getApellidos() + ";" + telefono + ";" + mail;
+		return cadena;
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		boolean r=false;
@@ -72,11 +79,15 @@ public class Persona {
 		return r;
 	}
 
+	
+	
+	
 	@Override
 	public String toString(){
 		String baseStr = super.toString(); 	
 		return baseStr + "    Contacto: " + nombre  + " " + apellidos + " " + mail + " " + telefono;	
 	}	
+	
 	
 	
 	

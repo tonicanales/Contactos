@@ -1,6 +1,8 @@
 package test;
 
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -78,10 +80,23 @@ public class TestContactos {
 		String[] lista = {"Pedro Martínez;0000;pedro@gmail.com","Juan Pérez;1111;Juan@gmail.com","Miguel González;3333;Miguel@gmail.com",
 		"Carlos Gómez;444;carlos@gmail.com"};
 		ListaContactos copyLista = new ListaContactos(lista);
+		
 		Assert.assertEquals("Juan", copyLista.findByName("Juan")[0].getNombre());
+	}
+	
+	
+	@Test
+	public void ordenaName(){
 		
+		String[] lista = {"AA Martínez;0000;pedro@gmail.com","Antonio Pérez;1111;Juan@gmail.com","Miguel González;3333;Miguel@gmail.com",
+		"Carlos Gómez;444;carlos@gmail.com"};
 		
+		ListaContactos copyLista = new ListaContactos(lista);
+		ListaContactos listaOrdenada = copyLista.sort();
 		
+		Assert.assertEquals("AA", listaOrdenada.get(0).getNombre());
+
 		
 	}
+	
 }
