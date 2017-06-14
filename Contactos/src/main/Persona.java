@@ -1,5 +1,7 @@
 package main;
 
+import util.Input;
+
 public class Persona {
 	
 	private String nombre;
@@ -58,8 +60,8 @@ public class Persona {
 	}
 
 	
-	public String getAsFormat(){
-		String cadena = this.getNombre()+ " " + getApellidos() + ";" + telefono + ";" + mail;
+	public String toFormat(){
+		String cadena = nombre + " " + apellidos + ";" + telefono + ";" + mail;
 		return cadena;
 	}
 	
@@ -84,12 +86,11 @@ public class Persona {
 	
 	@Override
 	public String toString(){
-		String baseStr = super.toString(); 	
-		return baseStr + "    Contacto: " + nombre  + " " + apellidos + " " + mail + " " + telefono;	
+		return  "Contacto: " + nombre  + " " + apellidos + " " + mail + " " + telefono;	
 	}	
 	
 	
-	
+
 	
 	
 }

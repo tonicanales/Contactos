@@ -6,7 +6,7 @@ public class ListaContactos {
 	
 	private Persona[] listacontactos;
 
-	public ListaContactos(String[] listacontactos){
+	public ListaContactos( String[] listacontactos){
 		iniContact(listacontactos);
 	}
 
@@ -34,7 +34,16 @@ public class ListaContactos {
 	 * @return
 	 */
 	public Persona get(int i) {
-		return listacontactos[i];
+		Persona[] copyLista = listacontactos;
+		return copyLista[i];
+	}
+	
+	public Persona[] getlista() {
+		
+		Persona[] lista = new Persona[listacontactos.length];
+		for(int i=0; i<listacontactos.length; i++)
+			lista[i]=listacontactos[i];
+		return lista;
 	}
 	
 	
@@ -73,7 +82,7 @@ public class ListaContactos {
 	 * @param person
 	 * @param index
 	 */
-	public void set(Persona person, int index){
+	public void set(int index, Persona person){
 		
 		if(index<listacontactos.length && index >= 0) 
 			listacontactos[index]=person;
@@ -110,22 +119,40 @@ public class ListaContactos {
 	public Persona[] findByName(String strName){
 		int cont = 0;
 		for (Persona person: listacontactos){
-			if(strName.length()<=person.getNombre().length()){
-				String subnombre = person.getNombre().substring(0, strName.length()).toLowerCase();
-				if (subnombre.equals(strName.toLowerCase())){
+			if (person.getNombre().toLowerCase().startsWith(strName.toLowerCase()))
 					cont++;
-				}
-			}
 		}
-		Persona[] copyLista = new Persona[cont];	
-		for (int i = 0, j = 0; i < listacontactos.length; i++){
-			if(strName.length()<=listacontactos[i].getNombre().length()){
-				String subnombre = listacontactos[i].getNombre().substring(0, strName.length()).toLowerCase();
-				if (subnombre.equals(strName.toLowerCase())){
+		Persona[] copyLista = new Persona[cont];
+		int i =0, j=0;
+		for (Persona person: listacontactos){
+			if (person.getNombre().toLowerCase().startsWith(strName.toLowerCase())){
 					copyLista[j]=listacontactos[i];
 					j++;
-				}
 			}
+			i++;
+		}	
+		return copyLista;
+	}
+	
+	
+	/**
+	 * Retorna todas las personas que coontengan strString en su campo mail
+	 * @return
+	 */
+	public Persona[] findByMail(String strMail){
+		int cont = 0;
+		for (Persona person: listacontactos){
+			if (person.getMail().toLowerCase().startsWith(strMail.toLowerCase()))
+				cont++;
+		}
+		Persona[] copyLista = new Persona[cont];
+		int i =0, j=0;
+		for (Persona person: listacontactos){
+			if (person.getMail().toLowerCase().startsWith(strMail.toLowerCase())){
+					copyLista[j]=listacontactos[i];
+					j++;
+			}
+			i++;
 		}	
 		return copyLista;
 	}
@@ -139,7 +166,7 @@ public class ListaContactos {
 		String[] listaOrdenada = new String[listacontactos.length];
 		int cont = 0;
 		for(Persona persona:listacontactos){
-			listaOrdenada[cont] = persona.getAsFormat();
+			listaOrdenada[cont] = persona.toFormat();
 			cont++;
 		}
 		
@@ -148,6 +175,15 @@ public class ListaContactos {
 	    return listaConOrden.listacontactos;
 
 	}
+
+	public String[] toFileFormat() {
+		String[] lista = new String[listacontactos.length];
+		for (int i=0; i < listacontactos.length; i++)
+		lista[i] = listacontactos[i].getNombre() + " " + listacontactos[i].getApellidos() + ";" + listacontactos[i].getTelefono() + ";" + listacontactos[i].getMail();
+		return lista;
+	}	
+		
+		
 	
 	
 	

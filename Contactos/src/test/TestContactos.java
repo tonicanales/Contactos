@@ -40,7 +40,7 @@ public class TestContactos {
 		String sobreContacto = "María Martínez;5555;maria@gmail.com";
 		Persona sobrePersona = new Persona(sobreContacto);
 		ListaContactos nuevaLista = new ListaContactos(lista);
-		nuevaLista.set(sobrePersona, 1);
+		nuevaLista.set(1, sobrePersona);
 		
 		Assert.assertEquals("María", nuevaLista.get(1).getNombre());
 		Assert.assertEquals("Martínez", nuevaLista.get(1).getApellidos());
@@ -77,24 +77,24 @@ public class TestContactos {
 	
 	@Test
 	public void compareName(){
-		String[] lista = {"Pedro Martínez;0000;pedro@gmail.com","Juan Pérez;1111;Juan@gmail.com","Miguel González;3333;Miguel@gmail.com",
+		String[] lista = {"Pedro Martínez;0000;pedro@gmail.com","Juan Pérez;1111;Juan@gmail.com","Jaime González;3333;Miguel@gmail.com",
 		"Carlos Gómez;444;carlos@gmail.com"};
 		ListaContactos copyLista = new ListaContactos(lista);
 		
-		Assert.assertEquals("Juan", copyLista.findByName("Juan")[0].getNombre());
+		Assert.assertEquals("Jaime", copyLista.findByName("Ja")[0].getNombre());
+
 	}
 	
 	
 	@Test
 	public void ordenaName(){
 		
-		String[] lista = {"AA Martínez;0000;pedro@gmail.com","Antonio Pérez;1111;Juan@gmail.com","Miguel González;3333;Miguel@gmail.com",
+		String[] lista = {"ZZ Martínez;0000;pedro@gmail.com","Antonio Pérez;1111;Juan@gmail.com","Miguel González;3333;Miguel@gmail.com",
 		"Carlos Gómez;444;carlos@gmail.com"};
 		
 		ListaContactos copyLista = new ListaContactos(lista);
-		ListaContactos listaOrdenada = copyLista.sort();
-		
-		Assert.assertEquals("AA", listaOrdenada.get(0).getNombre());
+		Persona[] listaOrdenada = copyLista.sort();
+		Assert.assertEquals("Antonio", listaOrdenada[0].getNombre());
 
 		
 	}
